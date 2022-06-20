@@ -7,6 +7,4 @@ Let's eSign Register is an open source tool for registering your root domain wit
 npx letsesign-register CONFIG_FILE
 ```
 
-## Usage
-
-Check [How to register your root domain with Let's eSign](https://github.com/letsesign/letsesign-docs/blob/main/HOWTO-register.md).
+As for how to compose the required `CONFIG_FILE`, check [How to register your root domain with Let's eSign](https://github.com/letsesign/letsesign-docs/blob/main/HOWTO-register.md).
