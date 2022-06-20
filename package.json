@@ -1,0 +1,35 @@
+{
+  "name": "letsesign-register",
+  "version": "1.0.10",
+  "description": "The tool for Let's eSign users to obtain the registration token and update the registration information.",
+  "main": "index.js",
+  "bin": {
+    "letsesign-register": "bin/cli.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/letsesign/letsesign-register",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/letsesign/letsesign-register"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.1105.0",
+    "jsonschema": "^1.4.0",
+    "node-fetch": "^2.6.7",
+    "tldjs": "^2.3.1"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0"
+  }
+}
