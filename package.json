@@ -1,6 +1,6 @@
 {
   "name": "letsesign-register",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "The tool for Let's eSign users to obtain the registration token and update the registration information.",
   "main": "index.js",
   "bin": {
