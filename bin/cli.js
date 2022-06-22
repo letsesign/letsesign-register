@@ -6,13 +6,13 @@ const register = require('../lib/register');
 
 const printUsage = () => {
   console.log(`
-Let's eSign Register (v${version})
+letsesign-register (v${version})
     
-The tool for Let's eSign users to obtain the
-registration token and update the registration information.
+The command line tool for registering your domain with Let's eSign
 
 Usage:
-    letsesign-register CONFIG_FILE
+
+  letsesign-register SITE_CONFIG_JSON_FILE
   `);
 };
 
