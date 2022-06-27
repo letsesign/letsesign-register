@@ -1,6 +1,6 @@
 {
   "name": "letsesign-register",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "The command line tool for registering your domain with Let's eSign",
   "main": "index.js",
   "bin": {
