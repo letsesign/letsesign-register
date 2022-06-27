@@ -7,4 +7,4 @@
 npx letsesign-register SITE_CONFIG_JSON_FILE
 ```
 
-As for how to compose the required `SITE_CONFIG_JSON_FILE`, please check [How to register your root domain with Let's eSign](https://github.com/letsesign/letsesign-docs/blob/main/HOWTO-register.md).
+As for how to compose the required `SITE_CONFIG_JSON_FILE`, please check [How to register your root domain with Let's eSign](https://github.com/letsesign/letsesign-register/blob/main/doc/HOWTO-register.md).
