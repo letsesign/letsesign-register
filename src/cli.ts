@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 const { existsSync } = require('fs');
 const { resolve } = require('path');
+const { register } = require('./register');
 const { version } = require('../package.json');
-const register = require('../lib/register');
 
 const printUsage = () => {
   console.log(`
@@ -25,7 +25,7 @@ const proc = async () => {
 
   if (!existsSync(configFullPath)) throw new Error('ERROR: please make sure that the config file exists');
 
-  await register.run(configFullPath);
+  await register(configFullPath);
 
   return '';
 };

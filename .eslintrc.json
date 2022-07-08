@@ -10,8 +10,8 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [".js"],
-        "moduleDirectory": ["lib", "node_modules"]
+        "extensions": [".ts"],
+        "moduleDirectory": ["node_modules"]
       }
     }
   },
@@ -23,7 +23,7 @@
       "error",
       "ignorePackages",
       {
-        "js": "never"
+        "ts": "never"
       }
     ]
   }

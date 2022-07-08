@@ -1,14 +1,14 @@
+const { Validator } = require('jsonschema');
 const fs = require('fs');
 const readline = require('readline');
-const { Validator } = require('jsonschema');
-const fetch = require('node-fetch');
+const axios = require('axios');
 const tldjs = require('tldjs');
 const crypto = require('crypto');
 
 const kmsUtil = require('./kms-util');
 
-const requestEnterInput = (message) => {
-  return new Promise((resolve) => {
+const requestEnterInput = (message: string) => {
+  return new Promise<void>((resolve) => {
     const readLineInterface = readline.createInterface({
       input: process.stdin,
       output: process.stdout
@@ -21,7 +21,7 @@ const requestEnterInput = (message) => {
   });
 };
 
-const checkConfig = (param) => {
+const checkConfig = (param: any) => {
   const schema = {
     type: 'object',
     properties: {
@@ -96,45 +96,51 @@ const checkConfig = (param) => {
   return new Validator().validate(param, schema);
 };
 
-const startRegisteration = async (payload) => {
-  const fetchResult = await fetch('https://register.letsesign.net/v1_1/start-registration', {
-    method: 'post',
-    body: JSON.stringify(payload),
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+const startRegisteration = async (payload: any) => {
+  const postResult = await axios.post(
+    'https://register.letsesign.net/v1_1/start-registration',
+    JSON.stringify(payload),
+    {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
     }
-  });
-  if (!fetchResult.ok || fetchResult.status !== 200) {
-    throw new Error(`start registration API with error: ${await fetchResult.text()}`);
+  );
+  if (postResult.status !== 200) {
+    throw new Error(`start registration API with error: ${postResult.statusText}`);
   }
-  const apiResp = await fetchResult.json();
+  const apiResp = postResult.data;
   return apiResp;
 };
 
-const completeRegisteration = async (payload) => {
-  const fetchResult = await fetch('https://register.letsesign.net/v1_1/complete-registration', {
-    method: 'post',
-    body: JSON.stringify(payload),
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
+const completeRegisteration = async (payload: any) => {
+  const postResult = await axios.post(
+    'https://register.letsesign.net/v1_1/complete-registration',
+    JSON.stringify(payload),
+    {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      }
     }
-  });
+  );
 
-  const apiResp = await fetchResult.json();
-  if (fetchResult.ok && fetchResult.status === 200) {
+  const apiResp = postResult.data;
+  if (postResult.status === 200) {
     apiResp.code = 0;
   }
   return apiResp;
 };
 
-const encryptData = (dataBuffer, kmsPubKey) => {
+const encryptData = (dataBuffer: string, kmsPubKey: string) => {
   const dataKey = crypto.randomBytes(32);
   const IV = crypto.randomBytes(16);
-  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(dataKey), IV);
+  const cipher = crypto.createCipheriv('aes-256-cbc', dataKey, IV);
+
   let encryptedData = cipher.update(dataBuffer, 'utf8', 'base64');
   encryptedData += cipher.final('base64');
+
   const encryptedDataKey = crypto
     .publicEncrypt(
       {
@@ -142,18 +148,20 @@ const encryptData = (dataBuffer, kmsPubKey) => {
         padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
         oaepHash: 'sha256'
       },
-      Buffer.from(dataKey)
+      dataKey
     )
     .toString('base64');
+
   const dataIV = IV.toString('base64');
+
   return {
+    encryptedData,
     encryptedDataKey,
-    dataIV,
-    encryptedData
+    dataIV
   };
 };
 
-const run = async (configPath) => {
+export const register = async (configPath: string) => {
   // 1. show terms notice
   await requestEnterInput(
     "\nPress Enter if you have read and agreed to the Let's eSign API Terms of Service\n(https://github.com/letsesign/letsesign-register/blob/main/doc/TermsOfService.md)\n..."
@@ -240,8 +248,4 @@ const run = async (configPath) => {
       throw verifyResult;
     }
   }
-};
-
-module.exports = {
-  run
 };

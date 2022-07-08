@@ -1,11 +1,12 @@
 {
   "name": "letsesign-register",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "The command line tool for registering your domain with Let's eSign",
   "bin": {
-    "letsesign-register": "bin/cli.js"
+    "letsesign-register": "dist/cli.js"
   },
   "scripts": {
+    "build": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "homepage": "https://github.com/letsesign/letsesign-register",
@@ -16,19 +17,22 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "aws-sdk": "^2.1105.0",
+    "aws-sdk": "^2.1170.0",
+    "axios": "^0.27.2",
     "jsonschema": "^1.4.0",
-    "node-fetch": "^2.6.7",
     "tldjs": "^2.3.1"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",
-    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@types/node": "^18.0.3",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.30.0"
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.30.1",
+    "typescript": "^4.7.4"
   }
 }
