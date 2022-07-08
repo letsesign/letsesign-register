@@ -164,7 +164,7 @@ const encryptData = (dataBuffer: string, kmsPubKey: string) => {
 export const register = async (configPath: string) => {
   // 1. show terms notice
   await requestEnterInput(
-    "\nPress Enter if you have read and agreed to the Let's eSign API Terms of Service\n(https://github.com/letsesign/letsesign-register/blob/main/doc/TermsOfService.md)\n..."
+    "\nPress Enter if you have read and agreed to the Let's eSign API Terms of Service\n(https://github.com/letsesign/docs/blob/main/TermsOfService.md)\n..."
   );
 
   // 2. check if config is correct
