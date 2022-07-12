@@ -173,6 +173,10 @@ export const register = async (configPath: string) => {
   let twilioConfig = null;
   const configData = JSON.parse(fs.readFileSync(configPath).toString('utf-8'));
 
+  // set default values
+  configData.config.signerAppURL = 'https://signer.letsesign.org/#/esign';
+  configData.config.enhancedPrivacy = false;
+
   const checkResult = checkConfig(configData);
   if (!checkResult.valid) {
     throw checkResult.errors;
